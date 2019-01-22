@@ -23,6 +23,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
+                android:onClick="openActualImage"
                 android:adjustViewBounds="true"/>
 
             <ImageView
@@ -32,6 +33,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
+                android:onClick="openCompressedImage"
                 android:adjustViewBounds="true"/>
 
         </LinearLayout>

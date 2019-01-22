@@ -61,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
         Log.v("MIMO_SAHA::", "height: " + height + " Width: " + width);
     }
 
+    public void openActualImage(View view) {
+        PhotoViewActivity.startPhotoViewActivity(this,
+                actualImage.getAbsolutePath());
+    }
+
+    public void openCompressedImage(View view) {
+        PhotoViewActivity.startPhotoViewActivity(this,
+                compressedImage.getAbsolutePath());
+    }
+
     private void clearImage() {
         actualImageView.setBackgroundColor(getRandomColor());
         compressedImageView.setImageDrawable(null);
