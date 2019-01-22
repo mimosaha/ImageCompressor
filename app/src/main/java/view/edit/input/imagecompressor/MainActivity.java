@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private File actualImage;
     private File compressedImage;
+    private int height, width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         actualImageView.setBackgroundColor(getRandomColor());
         clearImage();
+
+        setDeviceDimension();
+    }
+
+    private void setDeviceDimension() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+
+        Log.v("MIMO_SAHA::", "height: " + height + " Width: " + width);
     }
 
     private void clearImage() {
@@ -86,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             try {
                 compressedImage = new Compressor(this)
-                        .setMaxWidth(640)
-                        .setMaxHeight(480)
-                        .setQuality(75)
+                        .setMaxWidth(width)
+                        .setMaxHeight(height)
+                        .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
                         .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_PICTURES).getAbsolutePath())
@@ -132,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showError(String errorMessage) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
     private int getRandomColor() {
